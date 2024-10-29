@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 # Permitir apenas as URLs específicas
-CORS(app, resources={r"/*": {"origins": ["https://saudeai.netlify.app", "https://iclinicbot.netlify.app"]}})
+CORS(app, resources={r"/*": {"origins": ["https://saudeai.netlify.app/#/", "https://iclinicbot.netlify.app"]}})
 
 # Carregar variáveis de ambiente
 load_dotenv()
