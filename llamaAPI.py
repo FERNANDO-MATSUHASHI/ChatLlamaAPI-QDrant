@@ -10,15 +10,16 @@ from langchain.memory import ConversationBufferMemory
 from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
-CORS(app)
+# Permitir apenas as URLs específicas
+CORS(app, resources={r"/*": {"origins": ["https://saudeai.netlify.app", "https://iclinicbot.netlify.app"]}})
 
 # Carregar variáveis de ambiente
 load_dotenv()
 urlQdrant = os.getenv('DATABASE_URL')
 apiQdrant = os.getenv('CHAVE_QDRANT')
 apillama = os.getenv('CHAVE_LLAMA')
-portRender = os.getenv('PORT')
-hostRender = os.getenv('HOST')
+# portRender = os.getenv('PORT')
+# hostRender = os.getenv('HOST')
 
 # Inicializando o cliente do Qdrant
 qdrant_client = QdrantClient(
@@ -129,5 +130,5 @@ def chat():
 
 # Executa a aplicação Flask
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=5000, debug=True)
-    app.run(host=hostRender, port=portRender, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+    # app.run(host=hostRender, port=portRender, debug=True)
