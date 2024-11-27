@@ -52,13 +52,12 @@ sessions_memory = {}
 
 def get_session_memory(session_id: str) -> ConversationBufferMemory:
     if session_id not in sessions_memory:
-        # Cria uma nova memória para a sessão se não existir
         sessions_memory[session_id] = ConversationBufferMemory(memory_key="chat_history")
     return sessions_memory[session_id]
 
 def gerar_resposta_llama(query, contexto, history):
     headers = {
-        "Authorization": apillama,  # Token do OpenRouter
+        "Authorization": apillama, 
         "Content-Type": "application/json"
     }
     data = {
@@ -93,9 +92,9 @@ def buscar_contexto_qdrant(query_embedding):
     search_result = qdrant_client.search(
         collection_name="iClinicBot", 
         query_vector=query_embedding,
-        limit=3  # Limite de documentos mais próximos
+        limit=3 
     )
-    # Combine os textos dos resultados para usar como contexto
+
     contexto = " ".join([res.payload.get('text', '') for res in search_result])
     return contexto
 
